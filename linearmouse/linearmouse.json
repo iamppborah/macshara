@@ -80,13 +80,19 @@
         }
       },
       "pointer" : {
-        "acceleration" : 4,
+        "acceleration" : 5,
         "disableAcceleration" : false,
         "speed" : 0.0689655172413792768
       },
       "scrolling" : {
         "acceleration" : {
           "vertical" : 1
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "speed" : {
+          "vertical" : 0
         }
       }
     }
