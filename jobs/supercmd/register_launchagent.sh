@@ -15,6 +15,7 @@ mkdir -p "$HOME/Library/LaunchAgents"
 chmod +x "$SCRIPT_PATH"
 plutil -lint "$PLIST_SOURCE"
 
+launchctl bootout "$GUI_DOMAIN/$LABEL" >/dev/null 2>&1 || true
 launchctl bootout "$GUI_DOMAIN" "$PLIST_TARGET" >/dev/null 2>&1 || true
 rm -f "$PLIST_TARGET"
 ln -s "$PLIST_SOURCE" "$PLIST_TARGET"
@@ -23,6 +24,6 @@ launchctl bootstrap "$GUI_DOMAIN" "$PLIST_TARGET"
 launchctl enable "$GUI_DOMAIN/$LABEL"
 launchctl print "$GUI_DOMAIN/$LABEL" >/dev/null
 
-printf 'Synced LaunchAgent: %s\n' "$LABEL"
+printf 'Registered LaunchAgent: %s\n' "$LABEL"
 printf 'Script permission fixed: %s\n' "$SCRIPT_PATH"
 printf 'Plist linked at: %s\n' "$PLIST_TARGET"
