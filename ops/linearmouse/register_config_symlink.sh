@@ -3,8 +3,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-SOURCE_DIR="$HOME/.config/linearmouse"
-TARGET_DIR="$PROJECT_ROOT/linearmouse"
+SOURCE_DIR="$PROJECT_ROOT/linearmouse"
+TARGET_DIR="$HOME/.config/linearmouse"
 SOURCE_FILE="$SOURCE_DIR/linearmouse.json"
 TARGET_FILE="$TARGET_DIR/linearmouse.json"
 
@@ -25,7 +25,7 @@ fi
 
 if [[ -L "$TARGET_DIR" ]]; then
   if [[ "$(readlink "$TARGET_DIR")" == "$SOURCE_DIR" ]]; then
-    printf 'Linearmouse repo already symlinked: %s -> %s\n' "$TARGET_DIR" "$SOURCE_DIR"
+    printf 'Linearmouse config already symlinked: %s -> %s\n' "$TARGET_DIR" "$SOURCE_DIR"
     exit 0
   fi
   rm -f "$TARGET_DIR"
@@ -34,4 +34,4 @@ elif [[ -e "$TARGET_DIR" ]]; then
 fi
 
 ln -s "$SOURCE_DIR" "$TARGET_DIR"
-printf 'Symlinked linearmouse repo path: %s -> %s\n' "$TARGET_DIR" "$SOURCE_DIR"
+printf 'Symlinked linearmouse config path: %s -> %s\n' "$TARGET_DIR" "$SOURCE_DIR"
