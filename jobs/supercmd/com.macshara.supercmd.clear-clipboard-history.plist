@@ -23,9 +23,9 @@
   <string>/Users/iamppborah/Developer/personal/macshara</string>
 
   <key>StandardOutPath</key>
-  <string>/Users/iamppborah/Developer/personal/macshara/jobs/supercmd-clipboard-history.launchd.log</string>
+  <string>/Users/iamppborah/Developer/personal/macshara/logs/supercmd/supercmd-clipboard-history.launchd.log</string>
 
   <key>StandardErrorPath</key>
-  <string>/Users/iamppborah/Developer/personal/macshara/jobs/supercmd-clipboard-history.launchd.err.log</string>
+  <string>/Users/iamppborah/Developer/personal/macshara/logs/supercmd/supercmd-clipboard-history.launchd.err.log</string>
 </dict>
 </plist>
