@@ -5,7 +5,7 @@ LABEL="com.macshara.supercmd.clear-clipboard-history"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 SCRIPT_PATH="$PROJECT_ROOT/supercmd/clear_clipboard_history.sh"
-PLIST_SOURCE="$SCRIPT_DIR/com.macshara.supercmd.clear-clipboard-history.plist"
+PLIST_SOURCE="$PROJECT_ROOT/jobs/supercmd/com.macshara.supercmd.clear-clipboard-history.plist"
 PLIST_TARGET="$HOME/Library/LaunchAgents/$LABEL.plist"
 GUI_DOMAIN="gui/$(id -u)"
 
