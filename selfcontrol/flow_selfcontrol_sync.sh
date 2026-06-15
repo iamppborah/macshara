@@ -11,8 +11,12 @@ while true; do
         if [ "$CURRENT_PHASE" = "Flow" ]; then
             SC_STATUS=$(/Applications/SelfControl.app/Contents/MacOS/selfcontrol-cli is-running 2>&1 || echo "NO")
             if [[ "$SC_STATUS" == *"NO"* ]]; then
-                echo "[$(date)] Pomodoro phase detected! Starting SelfControl for 25 mins..."
-                END_DATE=$(date -u -v+25M +"%Y-%m-%dT%H:%M:%SZ")
+                REMAINING_TIME=$(osascript -e 'tell application "Flow" to getTime' || echo "25:00")
+                MINS=$(echo "$REMAINING_TIME" | awk -F: '{if(NF==3) print $1*60+$2; else print $1}')
+                SECS=$(echo "$REMAINING_TIME" | awk -F: '{if(NF==3) print $3; else print $2}')
+                
+                echo "[$(date)] Pomodoro phase detected! Flow remaining time: $REMAINING_TIME. Starting SelfControl..."
+                END_DATE=$(date -u -v+${MINS}M -v+${SECS}S +"%Y-%m-%dT%H:%M:%SZ")
                 TARGET_UID=$(id -u)
                 
                 # Sync the plain text blocklist to SelfControl's internal preferences
