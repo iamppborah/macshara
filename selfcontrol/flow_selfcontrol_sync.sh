@@ -16,7 +16,7 @@ while true; do
                 SECS=$(echo "$REMAINING_TIME" | awk -F: '{if(NF==3) print $3; else print $2}')
                 
                 echo "[$(date)] Pomodoro phase detected! Flow remaining time: $REMAINING_TIME. Starting SelfControl..."
-                END_DATE=$(date -u -v+${MINS}M -v+${SECS}S +"%Y-%m-%dT%H:%M:%SZ")
+                END_DATE=$(date -v+${MINS}M -v+${SECS}S +"%Y-%m-%dT%H:%M:%SZ")
                 TARGET_UID=$(id -u)
                 
                 # Sync the plain text blocklist to SelfControl's internal preferences
