@@ -10,6 +10,7 @@ while IFS= read -r file_path; do
 done < <(find "$PROJECT_ROOT/ops" -type f -name "*.sh" | sort)
 
 FILES+=("$PROJECT_ROOT/supercmd/clear_clipboard_history.sh")
+FILES+=("$PROJECT_ROOT/selfcontrol/flow_selfcontrol_sync.sh")
 
 for file_path in "${FILES[@]}"; do
   if [[ -f "$file_path" ]]; then
