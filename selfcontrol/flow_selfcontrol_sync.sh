@@ -13,10 +13,9 @@ while true; do
             if [[ "$SC_STATUS" == *"NO"* ]]; then
                 REMAINING_TIME=$(osascript -e 'tell application "Flow" to getTime' || echo "25:00")
                 MINS=$(echo "$REMAINING_TIME" | awk -F: '{if(NF==3) print $1*60+$2; else print $1}')
-                SECS=$(echo "$REMAINING_TIME" | awk -F: '{if(NF==3) print $3; else print $2}')
+                if [ "$MINS" -eq 0 ]; then MINS=1; fi
                 
-                echo "[$(date)] Pomodoro phase detected! Flow remaining time: $REMAINING_TIME. Starting SelfControl..."
-                END_DATE=$(date -v+${MINS}M -v+${SECS}S +"%Y-%m-%dT%H:%M:%SZ")
+                echo "[$(date)] Pomodoro phase detected! Flow remaining time: $REMAINING_TIME. Starting SelfControl for $MINS mins..."
                 TARGET_UID=$(id -u)
                 
                 # Sync the plain text blocklist to SelfControl's internal preferences
@@ -35,8 +34,11 @@ while true; do
                     fi
                 fi
 
+                # Use defaults write to set block duration because --enddate in selfcontrol-cli is buggy
+                defaults write org.eyebeam.SelfControl BlockDuration -int "$MINS"
+
                 # Assuming `sudo visudo` has NOPASSWD entry for selfcontrol-cli
-                sudo /Applications/SelfControl.app/Contents/MacOS/selfcontrol-cli --uid "$TARGET_UID" start --enddate "$END_DATE"
+                sudo /Applications/SelfControl.app/Contents/MacOS/selfcontrol-cli --uid "$TARGET_UID" start
             fi
         fi
     fi
